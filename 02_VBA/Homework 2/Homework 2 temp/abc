@@ -1,0 +1,32 @@
+Sub abc()
+
+'Specifies Sheet and Determines Total Number of Entries
+'Prints Total Entries
+Dim sht As Worksheet
+Dim LastRow As Long
+
+Set sht = ActiveSheet
+LastRow = sht.Range("A1").CurrentRegion.Rows.Count
+Cells(1, 9).Value = "Total Entries: " & LastRow
+
+'Formats Sheet Headings
+Cells(1, 10).Value = "Ticker"
+Cells(1, 11).Value = "Yearly Change"
+Cells(1, 12).Value = "Percent Change"
+Cells(1, 13).Value = "Total Stock Volume"
+Cells(1, 15).Value = "Ticker"
+Cells(1, 16).Value = "Value"
+
+Cells(2, 14).Value = "Greatest % Increase"
+Cells(3, 14).Value = "Greatest % Decrease"
+Cells(4, 14).Value = "Greatest Total Volume"
+
+'Define Variable for Row Index "i"
+'Define Variable for Ticker Row Index "j"
+Dim i As Integer
+Dim j As Ingeger
+
+For i = 2 To LastRow
+
+End Sub
+

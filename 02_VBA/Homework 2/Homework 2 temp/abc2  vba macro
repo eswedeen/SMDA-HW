@@ -1,0 +1,161 @@
+abc2  vba macro
+
+Sub abc()
+
+'Defines Variables for Worksheet Loops
+Dim ws As Integer
+Dim ws_count As Integer
+Dim starting_ws As Worksheet
+Dim ws_name As String
+
+'Defines Active Worksheet and Ends Subroutine if Incorrect Starting Sheet is Open
+ws_name = ActiveSheet.Name
+MsgBox ("Worksheet " & ws_name & " is Open")
+If ws_name <> "2016" Then
+    MsgBox ("Please Open Worksheet for 2016 Before Running the Program")
+    Exit Sub
+Else
+    Set starting_ws = ActiveSheet
+End If
+    
+    
+
+
+'Determine Start and End Values for Worksheet Loop
+'Set starting_ws = ActiveSheet
+ws_count = ActiveWorkbook.Worksheets.Count
+
+'Loop to Iterate through each Worksheet
+For ws = 1 To ws_count
+    
+    'Activates Worksheets Sequentially before Calculations
+    Active.Worksheets(ws).Activate
+    
+    'Autofits Column for Each Header to Include Sufficient Number of Characters
+    Active.Worksheets(ws).Range("H:H,I:I,J:J,K:K,L:L,M:M,O:O,P2:P4,Q2:Q4").EntireColumn.AutoFit
+    
+    
+    'Specifies Sheet and Determines Total Number of Entries
+    'Prints Total Entries
+    Dim sheet As Worksheet
+    Dim lastrow As Long
+    
+    'Determines Total Number of Rows for Each Ticker Entry, Enters Number
+    Set sheet = ActiveSheet
+    lastrow = sheet.Range("A1").CurrentRegion.Rows.Count
+    Cells(1, 9).Value = "Total Entries: " & lastrow
+    
+    'Formats Sheet Headings
+    Cells(1, 10).Value = "Ticker"
+    Cells(1, 11).Value = "Yearly Change"
+    Cells(1, 12).Value = "Percent Change"
+    Cells(1, 13).Value = "Total Stock Volume"
+    Cells(1, 16).Value = "Ticker"
+    Cells(1, 17).Value = "Value"
+    
+    Cells(2, 15).Value = "Greatest % Increase"
+    Cells(3, 15).Value = "Greatest % Decrease"
+    Cells(4, 15).Value = "Greatest Total Volume"
+    
+    'Define Variable for Row Index "i"
+    'Define Variable for Ticker Row Index "j"
+    Dim i As Long
+    Dim j As Long
+    Dim vol As Double
+    Dim openvalue As Double
+    Dim closevalue As Double
+    Dim lastindex As Long
+    Dim yearlychange As Double
+    
+        'Determines Total Number of Unique Tickers, Enters Number
+        For i = 2 To lastrow
+            If Cells(i, 1).Value <> Cells(i + 1, 1).Value Then
+                lastindex = lastindex + 1
+            End If
+        Next i
+    
+        Cells(2, 9).Value = "Total Tickers: " & lastindex
+        j = 2
+        vol = 0
+    
+        'Main Loop to Perform Checks for Each initial Entry
+        For i = 2 To lastrow
+            'If the Next Row Displays a New Ticker...
+            If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+                Cells(j, 10).Value = Cells(i, 1).Value
+                
+                'Stock Volume Calculation and Display
+                'Adds Last Value for Volume, Enters, then Resets
+                vol = vol + Cells(i, 7).Value
+                Cells(j, 13).Value = vol
+                vol = 0
+                
+                'Stores Closing Value
+                closevalue = Cells(i, 6).Value
+                
+                'Calculates Yearly Change
+                yearlychange = closevalue - openvalue
+                
+                'Formats Coloring of Yearly Change Cells
+                If yearlychange < 0 Then
+                    Cells(j, 11).Interior.ColorIndex = 3
+                    Else: Cells(j, 11).Interior.ColorIndex = 4
+                End If
+                
+                'Enters Yearly Change
+                Cells(j, 11).Value = yearlychange
+                        
+                'Calculates Percent Change and Enters
+                'Corrects for Stocks that Have not Opened or Display Opened at $0.00
+                If openvalue = 0 Then
+                    Cells(j, 12).Value = 0
+                    Else
+                    Cells(j, 12).Value = yearlychange / openvalue
+                End If
+                
+                'Resets Yearly Change to Zero
+                yearlychange = 0
+                
+                
+                'Sets j to Next Row for Entry
+                j = j + 1
+            
+            'If the Next Row Displays the Same Ticker...
+            Else
+                'Adds Stock Volume for Current Row to the Total
+                vol = vol + Cells(i, 7).Value
+                'Stores Opening Value
+                openvalue = Cells(i, 3).Value
+                
+            End If
+        Next i
+        
+        'Determine Greatest % Increase
+        For i = 2 To lastrow
+            If Cells(i, 12).Value > Cells(i + 1, 12).Value Then
+                Cells(2, 16).Value = Cells(i, 1).Value
+                Cells(2, 17).Value = Cells(i, 12).Value
+            End If
+        Next i
+        
+        'Determine Greatest % Decrease
+        For i = 2 To lastrow
+            If Cells(i, 12).Value < Cells(i + 1, 12).Value Then
+                Cells(3, 16).Value = Cells(i, 1).Value
+                Cells(3, 17).Value = Cells(i, 12).Value
+            End If
+        Next i
+        
+        'Determine Greatest Total Volume
+        For i = 2 To lastrow
+            If Cells(i, 13).Value > Cells(i + 1, 13).Value Then
+                Cells(4, 16).Value = Cells(i, 1).Value
+                Cells(4, 17).Value = Cells(i, 13).Value
+            End If
+        Next i
+    Next ws
+    
+'Activates First Active Worksheet
+starting_ws.Activate
+
+End Sub
