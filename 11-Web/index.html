@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>eswedeen.Github.io</title>
+  </head>
+  <body>
+
+<!------------------------------------------------------------------------------------------------------------------------------->
+<nav class="navbar bg-light navbar-expand-lg fixed-top">
+    <a href="index.html" class="navbar-brand">eswedeen.Github.io</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">Menu</button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="navbar-item">
+                <a href="index.html" class="nav-link">Home</a>
+            </li>
+
+            <li class="navbar-item">
+                <a href="comparisons.html" class="nav-link">Comparisons</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Data
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="Data1.html">Data: Rap Caviar</a>
+                    <a class="dropdown-item" href="Data2.html">Data: Mint</a>
+                    <a class="dropdown-item" href="Data3.html">Data: Rock This</a>
+                    <a class="dropdown-item" href="Data4.html">Data: ¡Viva Latino!</a>
+                </div>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Visualizations
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="visualization1.html">Audio Properties: Rap Caviar</a>
+                    <a class="dropdown-item" href="visualization2.html">Audio Properties: Mint</a>
+                    <a class="dropdown-item" href="visualization3.html">Audio Properties: Rock This</a>
+                    <a class="dropdown-item" href="visualization3.html">Audio Properties: ¡Viva Latino!</a>
+                </div>
+            </li>
+        </ul>
+    </div>  
+</nav>
+<!------------------------------------------------------------------------------------------------------------------------------->
+    <h1>Page Title</h1>
+
+    <div class="container text-center">
+        <blockquote class="blockquote text-center">
+            <h1>Spotify Audio Analysis</h1>
+            <p class="mb-0">Welcome to the Spotify Audio Analysis project</p>
+            <footer class="blockquote-footer">Erik</footer>
+        </blockquote>
+
+        <figure class="figure text-center">
+            <img src="Resources/Spotipy.PNG" class="img-fluid" alt="Spotipy">
+            <figcaption class="figure-caption">
+                <a href="https://spotipy.readthedocs.io/en/latest/" class="text-dark">Spotipy Library Documentation</a>
+            </figcaption>
+        </figure>
+    </div>
+
+    <div class="container mx-4">
+        <h2>Introduction</h2>
+        <p>
+            The purpose of this project was to experiment with using web APIs and Python code to perform an analysis with a data set
+            that was retreived using web API calls. for this project, we wanted to indentify characteristics of songs that were indicative
+            of popularity for a given genre.
+        </p>
+           
+        <p> 
+            Spotify has some useful features built into their web APIs that attribute an index value (0 to 1) for various audio features (properties) of
+            a given track. These properties attempt to quantify emotional and perceptual components to a song ranking it on positivity,
+            intensity, likeliness of being performed live, likeliness of being a speech based track, etc.. Not all available features were
+            included in the analysis.
+        </p
+        
+        <p>
+            A lightweight Python library, <a href="https://spotipy.readthedocs.io/en/latest/">"Spotipy"</a>, was used to perform Web API calls.
+        </p>
+
+        
+        <p>
+            For the purpose of this project, a collection of songs was sampled and analyzed statistically for each of the following features:
+        </p>
+
+        <ul>
+            <li>Energy: Perceptual measure of intensity, loudness, or noisiness.</li>
+            <li>Danceability: How suitable a track is for dancing. </li>
+            <li>Speechiness: Representation of how much speech is in a track.</li>
+            <li>Acousticness: Confidence measure for whether the track is acoustic or not.</li>
+            <li>Valence: Perceptual measure of positivity.</li>
+        </ul>
+
+        <h2>Procedure</h2>
+
+        <p>
+            To Determine what type of audio features would be indicative of success for a track within a popular genre, a sample
+            of tracks would need to be collected based on genre. Since Spotift has a collection of playlists already populated
+            categorically by genre, and the tracks within them selected for their popularity, this was chosen as a sample.
+        </p>
+        <p>
+            Several Spotify web APIs were utilized to identify these popular playlists, tracks, and audio features.
+            The procedure for retreiving each of these is a follows:
+        </p>
+
+        <ol>
+            <li>User Playlists: Retreives a specified user's public playlists. (In our case this is the user "spotify"</li>
+            <li>Playlists_tracks: Retreives a selected playlist's tracks and track IDs (Based on retreived playlist ID.)</li>
+            <li>Track Audio Features: Retreives a selected track's audio features (Based on retreived track ID)</li>   
+        </ol>
+
+        <p>
+            Once each of these API calls had been made. The data was collected, stored, and assimilated into a DataFrame using
+            the <a href="http://pandas.pydata.org/pandas-docs/stable/">Pandas</a> Library. And then analyzed using the<a href="https://docs.scipy.org/doc/"> 
+            Numpy and Scipy libraries</a>. Once this was done, <a href="https://matplotlib.org/">Matplotlib</a> was use to plot Normal Distribution
+            curves for the audio properties associated with each playlist of a given genre.
+        </p>
+
+        <h2>Audio Analysis Results</h2>
+            <ul>
+                <a href="visualization1.html">Audio Analysis for Playlist: Rap Caviar (Hip Hop)</a><br>
+                <a href="visualization2.html">Audio Analysis for Playlist: Mint (Electronic Dance Music)</a><br>
+                <a href="visualization3.html">Audio Analysis for Playlist: Rock This (Rock)</a><br>
+                <a href="visualization4.html">Audio Analysis for Playlsit: ¡Viva Latino! (Reggaeton)</a>
+            </ul>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
