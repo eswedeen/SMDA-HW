@@ -1,0 +1,31 @@
+Total Energy Production
+
+
+By Country
+    - % of Total World Production
+    - Color Gradient
+    - Tooltip
+By Region
+    - % of Total World Production
+    - Color Gradient
+    - Tooltip
+
+HTML (Bootstrap)
+    -Interactive Map (Leaflet.js)
+    -Dynamic Pie Chart (By Region and Year)
+    -Dynamic Bar Chart (By Country and Year) 
+
+-Clean CSV
+-Load CSV to DB
+-FLASK APP
+
+index.HTML
+app.py
+    -FLASK
+    -SQLAlchemy
+logic.js
+    -additional for different functions
+    -plots etc...
+    -dropdown for year
+config.js
+
